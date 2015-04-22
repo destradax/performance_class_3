@@ -12,6 +12,8 @@ public interface CountryRepository {
 
 	void save(Country country);
 	
+	void update(Country country);
+	
 	Collection<Country> findAll(int offset, int limit);
 	
 	Country findByName(String name);

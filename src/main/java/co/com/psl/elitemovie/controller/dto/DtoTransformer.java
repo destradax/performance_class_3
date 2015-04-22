@@ -28,5 +28,17 @@ public class DtoTransformer {
 		}
 		return resultList;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static <K, T> T toEntity(K dto, Class<T> entityClass) {
+		Object entity;
+		try {
+			entity = entityClass.newInstance();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		BeanUtils.copyProperties(dto, entity);
+		return (T) entity;
+	}
 
 }

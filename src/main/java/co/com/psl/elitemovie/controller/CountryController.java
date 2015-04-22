@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.psl.elitemovie.controller.dto.CountryDto;
+import co.com.psl.elitemovie.controller.dto.DtoTransformer;
+import co.com.psl.elitemovie.model.Country;
 import co.com.psl.elitemovie.repository.CountryRepository;
 
 @RestController
@@ -21,27 +23,38 @@ public class CountryController {
 
 	@RequestMapping(value="/country/", method=RequestMethod.GET)
 	public List<CountryDto> findAll() {
-		return null;
+		return DtoTransformer.toDto(countryRepository.findAll(),
+				CountryDto.class);
 	}
 	
 	@RequestMapping(value="/country/name/{name}", method=RequestMethod.GET)
 	public CountryDto findByName(@PathVariable String name) {
+		Country country = countryRepository.findByName(name);
+		if (country != null) {
+			return DtoTransformer.toDto(country, CountryDto.class);
+		}
 		return null;
 	}
 
 	@RequestMapping(value="/country/{id}", method=RequestMethod.GET)
-	public CountryDto findByName(@PathVariable int id ) {
-		return null;
+	public CountryDto findById(@PathVariable int id ) {
+		Country country = countryRepository.findById(id);
+		CountryDto dto = DtoTransformer.toDto(country, CountryDto.class);
+		return dto;
 	}
 
 	@RequestMapping(value="/country/", method=RequestMethod.POST)
 	public CountryDto save(@RequestBody CountryDto countryDto) {
-		return null;
+		Country country = DtoTransformer.toEntity(countryDto, Country.class);
+		countryRepository.save(country);
+		return DtoTransformer.toDto(country, CountryDto.class);
 	}
 
 	@RequestMapping(value="/country/{id}", method=RequestMethod.PUT)
 	public CountryDto update(@RequestBody CountryDto countryDto, @PathVariable int id) {
-		return null;
+		Country country = DtoTransformer.toEntity(countryDto, Country.class);
+		countryRepository.update(country);
+		return DtoTransformer.toDto(country, CountryDto.class);
 	}
 
 }

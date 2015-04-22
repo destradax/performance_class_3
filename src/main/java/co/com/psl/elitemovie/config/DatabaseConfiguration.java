@@ -68,7 +68,7 @@ public class DatabaseConfiguration implements EnvironmentAware {
 	public DataSource dataSource() throws URISyntaxException {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setUsername("postgres");
-		dataSource.setPassword("footprints");
+		dataSource.setPassword("Admin");
 		dataSource.setUrl(propertyResolver.getProperty("url"));
 		return dataSource;
 	}
