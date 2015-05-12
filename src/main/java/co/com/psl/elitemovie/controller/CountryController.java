@@ -21,13 +21,13 @@ public class CountryController {
 	@Autowired(required = false)
 	private CountryRepository countryRepository;
 
-	@RequestMapping(value="/country/", method=RequestMethod.GET)
+	@RequestMapping(value="/countries", method=RequestMethod.GET)
 	public List<CountryDto> findAll() {
 		return DtoTransformer.toDto(countryRepository.findAll(),
 				CountryDto.class);
 	}
 	
-	@RequestMapping(value="/country/name/{name}", method=RequestMethod.GET)
+	@RequestMapping(value="/countries/name/{name}", method=RequestMethod.GET)
 	public CountryDto findByName(@PathVariable String name) {
 		Country country = countryRepository.findByName(name);
 		if (country != null) {
@@ -36,21 +36,21 @@ public class CountryController {
 		return null;
 	}
 
-	@RequestMapping(value="/country/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/countries/{id}", method=RequestMethod.GET)
 	public CountryDto findById(@PathVariable int id ) {
 		Country country = countryRepository.findById(id);
 		CountryDto dto = DtoTransformer.toDto(country, CountryDto.class);
 		return dto;
 	}
 
-	@RequestMapping(value="/country/", method=RequestMethod.POST)
+	@RequestMapping(value="/countries", method=RequestMethod.POST)
 	public CountryDto save(@RequestBody CountryDto countryDto) {
 		Country country = DtoTransformer.toEntity(countryDto, Country.class);
 		countryRepository.save(country);
 		return DtoTransformer.toDto(country, CountryDto.class);
 	}
 
-	@RequestMapping(value="/country/{id}", method=RequestMethod.PUT)
+	@RequestMapping(value="/countries/{id}", method=RequestMethod.PUT)
 	public CountryDto update(@RequestBody CountryDto countryDto, @PathVariable int id) {
 		Country country = DtoTransformer.toEntity(countryDto, Country.class);
 		countryRepository.update(country);
