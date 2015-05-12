@@ -47,5 +47,10 @@ public class CinemaController {
 		cinemaRepository.update(cinema);
 		return DtoTransformer.toDto(cinema, CinemaDto.class);
 	}
+	
+	@RequestMapping(value="/cinemas/{id}", method=RequestMethod.DELETE)
+	public void delete(@PathVariable int id) {
+		cinemaRepository.delete(id);
+	}
 
 }

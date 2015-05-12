@@ -13,4 +13,6 @@ public interface CinemaRepository {
 	void save(Cinema cinema);
 	
 	void update(Cinema cinema);
+	
+	void delete(int id);
 }

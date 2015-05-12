@@ -32,4 +32,11 @@ public class DefaultCinemaRepository implements CinemaRepository {
 	public void update(Cinema cinema) {
 		persistenceService.update(cinema);
 	}
+
+	@Override
+	public void delete(int id) {
+		Cinema cinema = new Cinema();
+		cinema.setId(id);
+		persistenceService.remove(cinema);
+	}
 }

@@ -17,4 +17,6 @@ public interface CountryRepository {
 	Collection<Country> findAll(int offset, int limit);
 	
 	Country findByName(String name);
+	
+	void delete(int id);
 }

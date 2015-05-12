@@ -46,4 +46,11 @@ public class DefaultCountryRepository implements CountryRepository {
 		persistenceService.update(country);
 	}
 
+	@Override
+	public void delete(int id) {
+		Country country = new Country();
+		country.setId(id);
+		persistenceService.remove(country);
+	}
+
 }

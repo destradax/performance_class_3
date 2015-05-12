@@ -49,7 +49,7 @@ public class CountryController {
 		countryRepository.save(country);
 		return DtoTransformer.toDto(country, CountryDto.class);
 	}
-
+	
 	@RequestMapping(value="/countries/{id}", method=RequestMethod.PUT)
 	public CountryDto update(@RequestBody CountryDto countryDto, @PathVariable int id) {
 		Country country = DtoTransformer.toEntity(countryDto, Country.class);
@@ -57,4 +57,8 @@ public class CountryController {
 		return DtoTransformer.toDto(country, CountryDto.class);
 	}
 
+	@RequestMapping(value="/countries/{id}", method=RequestMethod.DELETE)
+	public void delete(@PathVariable int id) {
+		countryRepository.delete(id);
+	}
 }
